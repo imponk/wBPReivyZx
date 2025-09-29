@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jawa Pos Koran Instagram Uploader</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Jawa Pos Koran Instagram Uploader</h1>
+
+        <div class="controls">
+            <input id="upload" type="file" accept="image/*">
+            <button id="download">Download Hasil</button>
+        </div>
+
+        <div class="text-controls">
+            <input type="text" id="headInput" placeholder="Rubrik" />
+            <input type="text" id="upperInput" placeholder="Teks Atas Judul (opsional)" />
+            <textarea id="judulInput" placeholder="Judul"></textarea>
+            <textarea id="subjudulInput" placeholder="Subjudul (opsional)"></textarea>
+            <input type="text" id="kreditInput" placeholder="Kredit Foto" />
+            <select id="rubrikColor">
+                <option value="#fff">Rubrik Putih</option>
+                <option value="#007CBC">Rubrik Biru</option>
+            </select>
+            <select id="judulColor">
+                <option value="#fff">Judul/Subjudul Putih</option>
+                <option value="#000">Judul/Subjudul Hitam</option>
+            </select>
+            <select id="kreditColor">
+                <option value="#fff">Kredit Putih</option>
+                <option value="#000">Kredit Hitam</option>
+            </select>
+            <label><input type="checkbox" id="invertJawapos"> Invert Jawapos</label>
+            <label><input type="checkbox" id="invertMedsos"> Invert Medsos</label>
+            <label><input type="checkbox" id="upperUseBlock"> Blok Biru di Teks Atas</label>
+        </div>
+
+        <div class="slider-controls">
+            <label>Geser teks:
+                <input type="range" id="textGroupSlider" min="-700" max="200" value="0" />
+            </label>
+            <label>Zoom foto:
+                <input type="range" id="zoomSlider" min="0.1" max="2" step="0.01" value="1" />
+            </label>
+            <label>Fade:
+                <select id="fadeSelect">
+                    <option value="none">Tanpa Fade</option>
+                    <option value="top">Fade Atas (Putih)</option>
+                    <option value="bottom">Fade Bawah (Putih)</option>
+                    <option value="top-black">Fade Atas (Hitam)</option>
+                    <option value="bottom-black">Fade Bawah (Hitam)</option>
+                </select>
+            </label>
+            <label>Geser Fade:
+                <input type="range" id="fadeSlider" min="0" max="500" value="0" />
+            </label>
+        </div>
+
+        <div class="status" id="status">Status: Menunggu gambar.</div>
+
+        <div class="canvas-container">
+            <canvas id="canvas" width="1080" height="1350" aria-label="Preview"></canvas>
+        </div>
+
+        <p class="small">Dibuat dengan chatgpt, kontak: imponk@gmail.com</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
