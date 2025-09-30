@@ -191,7 +191,7 @@ function drawImageWithAspect() {
 
     // Gambar Rubrik
     if (headInput.value) {
-        ctx.font = 'bold 24pt "Proxima Nova Custom"';
+        ctx.font = 'bold 24pt "Proxima Nova Custom", san-serif';
         ctx.fillStyle = rubrikColor.value;
         ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
         currentY += SPACE_AFTER_RUBRIK;
@@ -277,7 +277,7 @@ function drawImageWithAspect() {
 
     if (kreditInput.value) {
         ctx.fillStyle = kreditColor.value;
-        ctx.font = 'bold 18px "Proxima Nova Custom"';
+        ctx.font = 'bold 18px "Proxima Nova Custom", san-serif';
         ctx.textBaseline = 'bottom';
         const text = kreditInput.value;
         const textWidth = ctx.measureText(text).width;
