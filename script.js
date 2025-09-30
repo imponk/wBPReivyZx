@@ -191,7 +191,7 @@ function drawImageWithAspect() {
 
     // Gambar Rubrik
     if (headInput.value) {
-        ctx.font = 'bold 24pt Proxima Nova Custom', san-serif';
+        ctx.font = 'bold 24pt Proxima Nova Custom, san-serif';
         ctx.fillStyle = rubrikColor.value;
         ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
         currentY += SPACE_AFTER_RUBRIK;
@@ -204,14 +204,14 @@ function drawImageWithAspect() {
             currentY = drawTextWithShrinkWrapBackground(
                 upperInput.value,
                 margin, currentY, targetWidth - 2 * margin, 30,
-                'bold 24pt Proxima Nova Custom', sans-serif', '#FFFFFF',
+                'bold 24pt Proxima Nova Custom, sans-serif', '#FFFFFF',
                 '#007CBC', 15, 8, 12
             );
         } else {
             currentY = drawWrappedTextMulti(
                 upperInput.value,
                 margin, currentY, targetWidth - 2 * margin, 30,
-                'bold 24pt Proxima Nova Custom', sans-serif', judulColor.value
+                'bold 24pt Proxima Nova Custom, sans-serif', judulColor.value
             );
         }
     }
@@ -237,7 +237,7 @@ function drawImageWithAspect() {
             subjudulY,
             canvas.width - 2 * margin,
             34,
-            '23pt Proxima Nova Custom', sans-serif',
+            '23pt Proxima Nova Custom, sans-serif',
             judulColor.value,
             0.99
         );
@@ -277,7 +277,7 @@ function drawImageWithAspect() {
 
     if (kreditInput.value) {
         ctx.fillStyle = kreditColor.value;
-        ctx.font = 'bold 18px Proxima Nova Custom', san-serif';
+        ctx.font = 'bold 18px Proxima Nova Custom, san-serif';
         ctx.textBaseline = 'bottom';
         const text = kreditInput.value;
         const textWidth = ctx.measureText(text).width;
