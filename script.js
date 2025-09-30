@@ -195,7 +195,7 @@ document.fonts.ready.then(() => {
 
         // Gambar Rubrik
         if (headInput.value) {
-            ctx.font = 'bold 24pt "Proxima Nova Custom"';
+ctx.font = 'bold 24pt "Proxima Nova Custom"';
             ctx.fillStyle = rubrikColor.value;
             ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
             currentY += SPACE_AFTER_RUBRIK;
