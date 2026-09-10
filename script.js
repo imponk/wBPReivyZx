@@ -225,8 +225,8 @@ document.fonts.ready.then(() => {
             margin,
             currentY,
             canvas.width - 2 * margin,
-            80,
-            'bold 68pt "League Gothic", sans-serif',
+            90,
+            '68pt "League Gothic", sans-serif',
             judulColor.value
         );
 
