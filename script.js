@@ -205,40 +205,40 @@ document.fonts.ready.then(() => {
             if (upperUseBlock.checked) {
                 currentY = drawTextWithShrinkWrapBackground(
                     upperInput.value,
-                    margin, currentY, targetWidth - 2 * margin, 30,
+                    margin, currentY, targetWidth - 2 * margin, 32,
                     '24pt "Oswald", sans-serif', '#FFFFFF',
                     '#007CBC', 15, 8, 12
                 );
             } else {
                 currentY = drawWrappedTextMulti(
                     upperInput.value,
-                    margin, currentY, targetWidth - 2 * margin, 30,
+                    margin, currentY, targetWidth - 2 * margin, 32,
                     '24pt "Oswald", sans-serif', judulColor.value
                 );
             }
         }
 
-        // Gambar Judul Utama (League Gothic)
+        // Gambar Judul Utama (League Gothic) - Ukuran font 68pt, leading 80
         currentY += SPACE_AFTER_UPPER;
         let afterJudulY = drawWrappedTextMulti(
             judulInput.value || 'Judul',
             margin,
             currentY,
             canvas.width - 2 * margin,
-            90,
-            '68pt "League Gothic", sans-serif',
+            80,
+            'bold 68pt "League Gothic", sans-serif',
             judulColor.value
         );
 
         // Gambar Subjudul (Oswald)
         if (subjudulInput.value) {
-            let subjudulY = afterJudulY - 20;
+            let subjudulY = afterJudulY - 10;
             drawWrappedTextMulti(
                 subjudulInput.value,
                 margin,
                 subjudulY,
                 canvas.width - 2 * margin,
-                34,
+                36,
                 '23pt "Oswald", sans-serif',
                 judulColor.value,
                 0.99
@@ -264,13 +264,26 @@ document.fonts.ready.then(() => {
             ctx.drawImage(logoKiriBawah, 0, targetHeight - drawH, drawW, drawH);
         }
 
+        // Medsos Logo & Kredit Foto
+        let medsosPosY = targetHeight - 50;
+        let medsosPosX = margin;
+        let medsosDrawW = targetWidth - 2 * margin;
+
         if (medsosLogo.complete && medsosLogo.naturalWidth) {
-            const maxW = targetWidth * 0.71;
+            // Ukuran diperkecil 5% dari sebelumnya (0.71 * 0.95 = 0.6745)
+            const maxW = targetWidth * 0.6745;
             const scale = maxW / medsosLogo.naturalWidth;
             const drawW = medsosLogo.naturalWidth * scale;
             const drawH = medsosLogo.naturalHeight * scale;
             const posX = (targetWidth - drawW) / 2;
-            const posY = targetHeight - drawH - 165;
+            
+            // Sejajar bagian bawah dengan logo-jawapos-biru.svg (paling bawah canvas)
+            const posY = targetHeight - drawH;
+
+            medsosPosX = posX;
+            medsosPosY = posY;
+            medsosDrawW = drawW;
+
             ctx.save();
             if (invertMedsos.checked) ctx.filter = "invert(1)";
             ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
@@ -278,12 +291,18 @@ document.fonts.ready.then(() => {
         }
 
         if (kreditInput.value) {
+            ctx.save();
             ctx.fillStyle = kreditColor.value;
             ctx.font = 'bold 18px "Proxima Nova Custom"';
             ctx.textBaseline = 'bottom';
             const text = kreditInput.value;
             const textWidth = ctx.measureText(text).width;
-            ctx.fillText(text, targetWidth - 50 - textWidth, targetHeight - 49);
+            
+            // Posisi tepat di atas logo-medsos.svg & rata kanan sejajar dengan sisi kanan logo medsos
+            const kreditX = medsosPosX + medsosDrawW - textWidth;
+            const kreditY = medsosPosY - 12;
+            ctx.fillText(text, kreditX, kreditY);
+            ctx.restore();
         }
 
         setStatus('Preview siap.');
