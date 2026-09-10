@@ -206,14 +206,14 @@ document.fonts.ready.then(() => {
                 currentY = drawTextWithShrinkWrapBackground(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'regular 24pt "Oswald", sans-serif', '#FFFFFF',
+                    '24pt "Oswald", sans-serif', '#FFFFFF',
                     '#007CBC', 15, 8, 12
                 );
             } else {
                 currentY = drawWrappedTextMulti(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'regular 24pt "Oswald", sans-serif', judulColor.value
+                    '24pt "Oswald", sans-serif', judulColor.value
                 );
             }
         }
@@ -239,7 +239,7 @@ document.fonts.ready.then(() => {
                 subjudulY,
                 canvas.width - 2 * margin,
                 34,
-                'regular 23pt "Oswald", sans-serif',
+                '23pt "Oswald", sans-serif',
                 judulColor.value,
                 0.99
             );
