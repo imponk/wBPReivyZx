@@ -218,7 +218,7 @@ document.fonts.ready.then(() => {
             }
         }
 
-        // Gambar Judul Utama (League Gothic) - Ukuran font 68pt, leading 80
+        // Gambar Judul Utama (League Gothic)
         currentY += SPACE_AFTER_UPPER;
         let afterJudulY = drawWrappedTextMulti(
             judulInput.value || 'Judul',
@@ -257,28 +257,30 @@ document.fonts.ready.then(() => {
             ctx.restore();
         }
 
+        // Logo Kiri Bawah (Jawa Pos Biru)
+        let biruTopY = targetHeight - 50;
         if (logoKiriBawah.complete && logoKiriBawah.naturalWidth) {
             const drawW = 100;
             const scale = drawW / logoKiriBawah.naturalWidth;
             const drawH = logoKiriBawah.naturalHeight * scale;
-            ctx.drawImage(logoKiriBawah, 0, targetHeight - drawH, drawW, drawH);
+            biruTopY = targetHeight - drawH;
+            ctx.drawImage(logoKiriBawah, 0, biruTopY, drawW, drawH);
         }
 
         // Medsos Logo & Kredit Foto
-        let medsosPosY = targetHeight - 50;
+        let medsosPosY = biruTopY;
         let medsosPosX = margin;
         let medsosDrawW = targetWidth - 2 * margin;
 
         if (medsosLogo.complete && medsosLogo.naturalWidth) {
-            // Ukuran diperkecil 5% dari sebelumnya (0.71 * 0.95 = 0.6745)
             const maxW = targetWidth * 0.6745;
             const scale = maxW / medsosLogo.naturalWidth;
             const drawW = medsosLogo.naturalWidth * scale;
             const drawH = medsosLogo.naturalHeight * scale;
             const posX = (targetWidth - drawW) / 2;
             
-            // Sejajar bagian bawah dengan logo-jawapos-biru.svg (paling bawah canvas)
-            const posY = targetHeight - drawH;
+            // Posisi Y disatukan dengan margin atas logo Jawa Pos Biru
+            const posY = biruTopY;
 
             medsosPosX = posX;
             medsosPosY = posY;
@@ -290,6 +292,7 @@ document.fonts.ready.then(() => {
             ctx.restore();
         }
 
+        // Kredit Foto (Posisi tepat di atas logo-medsos)
         if (kreditInput.value) {
             ctx.save();
             ctx.fillStyle = kreditColor.value;
@@ -298,7 +301,6 @@ document.fonts.ready.then(() => {
             const text = kreditInput.value;
             const textWidth = ctx.measureText(text).width;
             
-            // Posisi tepat di atas logo-medsos.svg & rata kanan sejajar dengan sisi kanan logo medsos
             const kreditX = medsosPosX + medsosDrawW - textWidth;
             const kreditY = medsosPosY - 12;
             ctx.fillText(text, kreditX, kreditY);
