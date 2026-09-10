@@ -50,7 +50,6 @@ document.fonts.ready.then(() => {
     const medsosLogo = new Image();
     medsosLogo.src = "assets/logo-medsos.svg";
 
-
     function setStatus(t) {
         statusEl.textContent = 'Status: ' + t;
     }
@@ -141,7 +140,6 @@ document.fonts.ready.then(() => {
         return drawY;
     }
 
-
     function drawImageWithAspect() {
         if (!img) {
             setStatus('Belum ada gambar.');
@@ -195,32 +193,32 @@ document.fonts.ready.then(() => {
 
         // Gambar Rubrik
         if (headInput.value) {
-ctx.font = 'bold 24pt "Proxima Nova Custom"';
+            ctx.font = 'bold 24pt "Proxima Nova Custom"';
             ctx.fillStyle = rubrikColor.value;
             ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
             currentY += SPACE_AFTER_RUBRIK;
         }
 
-        // Gambar Teks Atas Judul
+        // Gambar Upper Text (Oswald)
         if (upperInput.value) {
             currentY += 20;
             if (upperUseBlock.checked) {
                 currentY = drawTextWithShrinkWrapBackground(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'bold 24pt "Proxima Nova Custom", sans-serif', '#FFFFFF',
+                    'bold 24pt "Oswald", sans-serif', '#FFFFFF',
                     '#007CBC', 15, 8, 12
                 );
             } else {
                 currentY = drawWrappedTextMulti(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'bold 24pt "Proxima Nova Custom", sans-serif', judulColor.value
+                    'bold 24pt "Oswald", sans-serif', judulColor.value
                 );
             }
         }
 
-        // Gambar Judul Utama (Tetap menggunakan DM Serif Display)
+        // Gambar Judul Utama (League Gothic)
         currentY += SPACE_AFTER_UPPER;
         let afterJudulY = drawWrappedTextMulti(
             judulInput.value || 'Judul',
@@ -228,11 +226,11 @@ ctx.font = 'bold 24pt "Proxima Nova Custom"';
             currentY,
             canvas.width - 2 * margin,
             68,
-            '56pt "DM Serif Display", serif',
+            'bold 60pt "League Gothic", sans-serif',
             judulColor.value
         );
 
-        // Gambar Subjudul
+        // Gambar Subjudul (Oswald)
         if (subjudulInput.value) {
             let subjudulY = afterJudulY - 20;
             drawWrappedTextMulti(
@@ -241,7 +239,7 @@ ctx.font = 'bold 24pt "Proxima Nova Custom"';
                 subjudulY,
                 canvas.width - 2 * margin,
                 34,
-                '23pt "Proxima Nova Custom", sans-serif',
+                'bold 23pt "Oswald", sans-serif',
                 judulColor.value,
                 0.99
             );
@@ -315,8 +313,7 @@ ctx.font = 'bold 24pt "Proxima Nova Custom"';
         reader.readAsDataURL(file);
         setStatus('Memuat file...');
     });
-    
-    // Semua event listener kita letakkan di sini agar tidak dijalankan sebelum font siap
+
     headInput.addEventListener('input', drawImageWithAspect);
     upperInput.addEventListener('input', drawImageWithAspect);
     judulInput.addEventListener('input', drawImageWithAspect);
@@ -375,13 +372,11 @@ ctx.font = 'bold 24pt "Proxima Nova Custom"';
         canvas.classList.remove('grabbing');
     });
 
-    // Panggil fungsi gambar sekali di awal setelah font siap
-    // Ini penting jika gambar sudah dipilih sebelum halaman di-refresh
     if (upload.files && upload.files[0]) {
         const reader = new FileReader();
         reader.onload = ev => loadMainImageFromDataURL(ev.target.result);
         reader.readAsDataURL(upload.files[0]);
     } else {
-        drawImageWithAspect(); // Gambar ulang elemen teks awal
+        drawImageWithAspect();
     }
 });
