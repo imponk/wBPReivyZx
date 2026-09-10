@@ -193,7 +193,7 @@ document.fonts.ready.then(() => {
 
         // Gambar Rubrik
         if (headInput.value) {
-            ctx.font = 'bold 24pt "Proxima Nova Custom"';
+            ctx.font = 'bold 24pt "Oswald", sans-serif';
             ctx.fillStyle = rubrikColor.value;
             ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
             currentY += SPACE_AFTER_RUBRIK;
@@ -206,14 +206,14 @@ document.fonts.ready.then(() => {
                 currentY = drawTextWithShrinkWrapBackground(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'bold 24pt "Oswald", sans-serif', '#FFFFFF',
+                    'regular 24pt "Oswald", sans-serif', '#FFFFFF',
                     '#007CBC', 15, 8, 12
                 );
             } else {
                 currentY = drawWrappedTextMulti(
                     upperInput.value,
                     margin, currentY, targetWidth - 2 * margin, 30,
-                    'bold 24pt "Oswald", sans-serif', judulColor.value
+                    'regular 24pt "Oswald", sans-serif', judulColor.value
                 );
             }
         }
@@ -239,7 +239,7 @@ document.fonts.ready.then(() => {
                 subjudulY,
                 canvas.width - 2 * margin,
                 34,
-                'bold 23pt "Oswald", sans-serif',
+                'regular 23pt "Oswald", sans-serif',
                 judulColor.value,
                 0.99
             );
