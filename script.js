@@ -16,7 +16,7 @@ document.fonts.ready.then(() => {
     const judulColor = document.getElementById('judulColor');
     const kreditColor = document.getElementById('kreditColor');
     const invertJawapos = document.getElementById('invertJawapos');
-    const invertMedsos = document.getElementById('invertMedsos'); // Menggunakan elemen <select id="invertMedsos">
+    const invertMedsos = document.getElementById('invertMedsos'); // Mengambil nilai dari <select id="invertMedsos">
     const textGroupSlider = document.getElementById('textGroupSlider');
     const zoomSlider = document.getElementById('zoomSlider');
     const fadeSelect = document.getElementById('fadeSelect');
@@ -246,12 +246,12 @@ document.fonts.ready.then(() => {
         }
 
         // Logo Kanan Atas (logo-jawapos-putih.svg)
-        // Bergeser sejajar dengan margin kanan (targetWidth - drawW - margin)
+        // Posisi digeser sedikit ke kanan (jarak margin dari kanan diubah dari 170 menjadi 100)
         if (logoKananAtas.complete && logoKananAtas.naturalWidth) {
             const drawW = 200;
             const scale = drawW / logoKananAtas.naturalWidth;
             const drawH = logoKananAtas.naturalHeight * scale;
-            const posX = targetWidth - drawW - margin;
+            const posX = targetWidth - drawW - 100;
             const posY = 50;
             ctx.save();
             if (invertJawapos.checked) ctx.filter = "invert(1)";
@@ -289,17 +289,23 @@ document.fonts.ready.then(() => {
             medsosDrawW = drawW;
 
             ctx.save();
-            // Pengaturan warna logo medsos (Gray 50% default, Putih, atau Hitam)
+            // Pengaturan warna logo medsos tanpa transparansi
             const colorOption = invertMedsos.value;
             if (colorOption === 'white') {
                 ctx.filter = "brightness(0) invert(1)";
+                ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
             } else if (colorOption === 'black') {
                 ctx.filter = "brightness(0)";
+                ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
             } else {
-                // Default: Gray / Black 50%
-                ctx.filter = "grayscale(100%) opacity(50%)";
+                // Default: Gray Solid (#808080) tanpa transparansi
+                // 1. Gambar gambar dasar
+                ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
+                // 2. Warnai area SVG dengan warna abu-abu solid menggunakan composite mode
+                ctx.globalCompositeOperation = 'source-in';
+                ctx.fillStyle = '#808080';
+                ctx.fillRect(posX, posY, drawW, drawH);
             }
-            ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
             ctx.restore();
         }
 
