@@ -189,13 +189,15 @@ document.fonts.ready.then(() => {
         }
 
         const margin = 170;
+        // Lebar area teks ditambah dengan mengurangi margin kanan (120px dari kanan margin)
+        const textMaxWidth = targetWidth - margin - 120;
         let currentY = 780 + textGroupOffset;
 
         // Gambar Rubrik
         if (headInput.value) {
             ctx.font = 'bold 24pt "Oswald", sans-serif';
             ctx.fillStyle = rubrikColor.value;
-            ctx.fillText(headInput.value, margin, currentY, targetWidth - 2 * margin);
+            ctx.fillText(headInput.value, margin, currentY, textMaxWidth);
             currentY += SPACE_AFTER_RUBRIK;
         }
 
@@ -205,14 +207,14 @@ document.fonts.ready.then(() => {
             if (upperUseBlock.checked) {
                 currentY = drawTextWithShrinkWrapBackground(
                     upperInput.value,
-                    margin, currentY, targetWidth - 2 * margin, 32,
+                    margin, currentY, textMaxWidth, 32,
                     '24pt "Oswald", sans-serif', '#FFFFFF',
                     '#007CBC', 15, 8, 12
                 );
             } else {
                 currentY = drawWrappedTextMulti(
                     upperInput.value,
-                    margin, currentY, targetWidth - 2 * margin, 32,
+                    margin, currentY, textMaxWidth, 32,
                     '24pt "Oswald", sans-serif', judulColor.value
                 );
             }
@@ -224,7 +226,7 @@ document.fonts.ready.then(() => {
             judulInput.value || 'Judul',
             margin,
             currentY,
-            canvas.width - 2 * margin,
+            textMaxWidth,
             80,
             '68pt "League Gothic", sans-serif',
             judulColor.value
@@ -237,7 +239,7 @@ document.fonts.ready.then(() => {
                 subjudulInput.value,
                 margin,
                 subjudulY,
-                canvas.width - 2 * margin,
+                textMaxWidth,
                 36,
                 '23pt "Oswald", sans-serif',
                 judulColor.value,
@@ -246,12 +248,12 @@ document.fonts.ready.then(() => {
         }
 
         // Logo Kanan Atas (logo-jawapos-putih.svg)
-        // Digeser lebih ke kanan (margin dari kanan = 70px)
+        // Digeser ke kiri sedikit ~5mm (posisi dari kanan diubah dari 70px menjadi 90px)
         if (logoKananAtas.complete && logoKananAtas.naturalWidth) {
             const drawW = 200;
             const scale = drawW / logoKananAtas.naturalWidth;
             const drawH = logoKananAtas.naturalHeight * scale;
-            const posX = targetWidth - drawW - 70;
+            const posX = targetWidth - drawW - 90;
             const posY = 50;
             ctx.save();
             if (invertJawapos.checked) ctx.filter = "invert(1)";
@@ -294,7 +296,6 @@ document.fonts.ready.then(() => {
             } else if (colorOption === 'black') {
                 ctx.filter = "brightness(0)";
             } else {
-                // Gray solid tanpa membuat blok transparan di seluruh canvas
                 ctx.filter = "grayscale(100%) brightness(0.5)";
             }
             ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
