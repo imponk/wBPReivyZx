@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="card">
@@ -38,7 +38,15 @@
                 <option value="#000">Kredit Hitam</option>
             </select>
             <label><input type="checkbox" id="invertJawapos"> Invert Jawapos</label>
-            <label><input type="checkbox" id="invertMedsos"> Invert Medsos</label>
+            
+            <label for="invertMedsos">Warna Logo Medsos:
+                <select id="invertMedsos">
+                    <option value="gray" selected>Gray / Black 50%</option>
+                    <option value="white">Putih</option>
+                    <option value="black">Hitam</option>
+                </select>
+            </label>
+
             <label><input type="checkbox" id="upperUseBlock"> Blok Biru di Teks Atas</label>
         </div>
 
