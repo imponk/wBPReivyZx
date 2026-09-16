@@ -16,7 +16,7 @@ document.fonts.ready.then(() => {
     const judulColor = document.getElementById('judulColor');
     const kreditColor = document.getElementById('kreditColor');
     const invertJawapos = document.getElementById('invertJawapos');
-    const invertMedsos = document.getElementById('invertMedsos');
+    const invertMedsos = document.getElementById('invertMedsos'); // Menggunakan elemen <select id="invertMedsos">
     const textGroupSlider = document.getElementById('textGroupSlider');
     const zoomSlider = document.getElementById('zoomSlider');
     const fadeSelect = document.getElementById('fadeSelect');
@@ -245,12 +245,14 @@ document.fonts.ready.then(() => {
             );
         }
 
+        // Logo Kanan Atas (logo-jawapos-putih.svg)
+        // Bergeser sejajar dengan margin kanan (targetWidth - drawW - margin)
         if (logoKananAtas.complete && logoKananAtas.naturalWidth) {
             const drawW = 200;
             const scale = drawW / logoKananAtas.naturalWidth;
             const drawH = logoKananAtas.naturalHeight * scale;
-            const posX = targetWidth - drawW - 50,
-                posY = 50;
+            const posX = targetWidth - drawW - margin;
+            const posY = 50;
             ctx.save();
             if (invertJawapos.checked) ctx.filter = "invert(1)";
             ctx.drawImage(logoKananAtas, posX, posY, drawW, drawH);
@@ -287,7 +289,16 @@ document.fonts.ready.then(() => {
             medsosDrawW = drawW;
 
             ctx.save();
-            if (invertMedsos.checked) ctx.filter = "invert(1)";
+            // Pengaturan warna logo medsos (Gray 50% default, Putih, atau Hitam)
+            const colorOption = invertMedsos.value;
+            if (colorOption === 'white') {
+                ctx.filter = "brightness(0) invert(1)";
+            } else if (colorOption === 'black') {
+                ctx.filter = "brightness(0)";
+            } else {
+                // Default: Gray / Black 50%
+                ctx.filter = "grayscale(100%) opacity(50%)";
+            }
             ctx.drawImage(medsosLogo, posX, posY, drawW, drawH);
             ctx.restore();
         }
