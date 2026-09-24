@@ -227,7 +227,7 @@ document.fonts.ready.then(() => {
             margin,
             currentY,
             textMaxWidth,
-            80,
+            90,
             '68pt "League Gothic", sans-serif',
             judulColor.value
         );
